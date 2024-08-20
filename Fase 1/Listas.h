@@ -31,6 +31,7 @@ class ListaSE
         }
         void Insertar(T dato);
         void Imprimir();
+        bool buscar(string nombre, string contrasenia);
         bool ListaVacia() {return (primero == NULL);}
 };
 

@@ -1,5 +1,31 @@
 #include "Listas.h"
 
+struct Usuario {
+    string nombre;
+    string apellido;
+    string fechaNac; 
+    string correoElectronico;
+    string contrasenia;
+    Usuario(string nombre, string apellido, string fechaNac, string correoElectronico, string contrasenia) : nombre(nombre), apellido(apellido), fechaNac(fechaNac), correoElectronico(correoElectronico), contrasenia(contrasenia){}
+    friend ostream& operator<<(ostream& os, const Usuario& u) {
+        os << u.nombre << " " << u.apellido << " " << u.fechaNac << " " << u.correoElectronico << " " << u.contrasenia << " ";
+        return os;
+        }
+    };
+    
+struct Publicacion {
+    string dato;
+    Publicacion(string dato) : dato(dato) {}
+    /*friend ostream& operator<<(ostream& os, const Publicacion& p) {
+        os << u.nombre << " " << u.apellido << " " << u.fechaNac << " " << u.correoElectronico << " " << u.contrasenia << " ";
+        return os;
+        }*/
+    };
+
+ListaSE<Usuario> listadmin;
+ListaSE<Usuario> listausers;
+
+
 template <typename T>
 void ListaSE<T>::Insertar(T dato)
 {
@@ -25,6 +51,19 @@ void ListaSE<T>::Imprimir()
             temp = temp->siguiente;
         }
         cout << "nullptr" << endl;
+};
+
+template <typename T>
+bool ListaSE<T>::buscar(string nombre, string contrasenia)
+{
+    Nodo<T>* temp = primero;
+    while (temp != nullptr) {
+        if (temp->dato.nombre == nombre && temp->dato.contrasenia == contrasenia) {
+            return true;
+        }
+        temp = temp->siguiente;
+    }
+    return false;
 };
 
 template <typename T>

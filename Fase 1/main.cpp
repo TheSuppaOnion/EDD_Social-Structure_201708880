@@ -1,37 +1,18 @@
 #include <iostream>
 #include "Listas.cpp"
 #include <regex>
+#include <conio.h>
+#include <limits>
+#include "Menu.cpp"
+
 using namespace std;
 
-struct Usuario {
-    string nombre;
-    string apellido;
-    string fechaNac; 
-    string correoElectronico;
-    string contrasenia;
-    Usuario(string nombre, string apellido, string fechaNac, string correoElectronico, string contrasenia) : nombre(nombre), apellido(apellido), fechaNac(fechaNac), correoElectronico(correoElectronico), contrasenia(contrasenia){}
-    friend ostream& operator<<(ostream& os, const Usuario& u) {
-        os << u.nombre << " " << u.apellido << " " << u.fechaNac << " " << u.correoElectronico << " " << u.contrasenia << " ";
-        return os;
-        }
-    };
-    
-struct Publicacion {
-    string dato;
-    Publicacion(string dato) : dato(dato) {}
-    /*friend ostream& operator<<(ostream& os, const Publicacion& p) {
-        os << u.nombre << " " << u.apellido << " " << u.fechaNac << " " << u.correoElectronico << " " << u.contrasenia << " ";
-        return os;
-        }*/
-    };
-
 int main() {
-    ListaSE<Usuario> listadmin;
-    ListaSE<Usuario> listausers;
     int opcion;
     listadmin.Insertar(Usuario("Admin", "Romero", "14/09/1998", "admin@gmail.com", "EDD2S2024"));
     //listadmin.Imprimir();
     do {
+        system("cls");
         cout << "Social Structure - Bismarck Romero 201708880" << endl;
         cout << "1. Iniciar Sesion" << endl;
         cout << "2. Registrarse" << endl;
@@ -41,11 +22,46 @@ int main() {
         cin >> opcion;
 
         switch (opcion) {
-            case 1:
-                // Code for "Iniciar Sesión"
-                break;
-            case 2:{
+            case 1:{
+                // Iniciar Sesión
+                string usuario;
+                string contra;
 
+                cout << "Ingrese su nombre de usuario: ";
+                cin >> usuario;
+                char c;
+                cout << "Ingrese su contrasenia: ";
+                while (true) {
+                    c = _getch();
+                    if (c == '\r') { // Enter
+                    break;
+                    } else if (c == '\b') { // Barra espaciadora
+                    if (!contra.empty()) {
+                        contra.pop_back();
+                        cout << "\b \b"; // Mover el cursor atras, imprimir espacio, mover el cursor atras de nuevo
+                    }
+                } else {
+                    contra.push_back(c);
+                    cout << "*";
+                    }
+                }
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpia el buffer del teclado
+                cout << endl;
+                //cout << "Contrasenia ingresada: " << contra << endl;
+
+                // Buscar nombre y contraseña en las listas
+                if (listadmin.buscar(usuario, contra) || listausers.buscar(usuario, contra)) {
+                    cout << "Inicio de sesion exitoso. Bienvenido" << endl;
+                    this_thread::sleep_for(chrono::seconds(3));
+                    // Menu de usuario
+                    Usuarios(listadmin.buscar(usuario, contra));
+                } else {
+                    cout << "Error en el usuario o contrasenia, por favor intente de nuevo" << endl;
+                    this_thread::sleep_for(chrono::seconds(3));
+                    }
+                }  break;
+            case 2:{
+                // Registrarse
                 string nombres;
                 string apellidos;
                 string fechaNacimiento;
@@ -102,13 +118,17 @@ int main() {
                 listausers.Imprimir();
                 } break;
             case 3:
-                // Code for "Información"
+                // Información
                 break;
             case 4:
+                // Salir
                 cout << "Que tenga buen dia..." << endl;
+                this_thread::sleep_for(chrono::seconds(2));
+                system("cls");
                 break;
             default:
                 cout << "Por favor seleccione una opcion de la lista." << endl;
+                this_thread::sleep_for(chrono::seconds(2));
                 break;
         }
     } while (opcion != 4);
