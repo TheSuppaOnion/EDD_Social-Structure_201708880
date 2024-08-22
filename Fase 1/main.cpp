@@ -10,6 +10,8 @@ using namespace std;
 int main() {
     int opcion;
     listadmin.Insertar(Usuario("Admin", "Romero", "14/09/1998", "admin@gmail.com", "EDD2S2024"));
+    listausers.Insertar(Usuario("Test", "Romero", "14/09/1998", "test@ex.com", "123"));
+    listausers.Insertar(Usuario("Test", "Romero", "14/09/1998", "123@ex.com", "123"));
     //listadmin.Imprimir();
     do {
         system("cls");
@@ -19,16 +21,22 @@ int main() {
         cout << "3. Informacion" << endl;
         cout << "4. Salir" << endl;
         cout << "Eliga la opcion deseada: ";
-        cin >> opcion;
+
+        while (!(cin >> opcion)) {
+            // Si la entrada no es un número, limpiar el error y el buffer de entrada
+            cin.clear(); // Limpia el estado de error de cin
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignora el resto de la línea
+            cout << "Opcion invalida, por favor intente de nuevo: ";
+        }
 
         switch (opcion) {
             case 1:{
                 // Iniciar Sesión
-                string usuario;
+                string correo;
                 string contra;
 
-                cout << "Ingrese su nombre de usuario: ";
-                cin >> usuario;
+                cout << "Ingrese su correo electronico: ";
+                cin >> correo;
                 char c;
                 cout << "Ingrese su contrasenia: ";
                 while (true) {
@@ -50,13 +58,13 @@ int main() {
                 //cout << "Contrasenia ingresada: " << contra << endl;
 
                 // Buscar nombre y contraseña en las listas
-                if (listadmin.buscar(usuario, contra) || listausers.buscar(usuario, contra)) {
-                    cout << "Inicio de sesion exitoso. Bienvenido" << endl;
+                if (listadmin.buscar(correo, contra) || listausers.buscar(correo, contra)) {
+                    cout << "Inicio de sesion exitoso. Bienvenido(a) " << correo << endl;
                     this_thread::sleep_for(chrono::seconds(3));
                     // Menu de usuario
-                    Usuarios(listadmin.buscar(usuario, contra));
+                    Menu(listadmin.buscar(correo, contra), correo);
                 } else {
-                    cout << "Error en el usuario o contrasenia, por favor intente de nuevo" << endl;
+                    cout << "Error en el correo o contrasenia, por favor intente de nuevo" << endl;
                     this_thread::sleep_for(chrono::seconds(3));
                     }
                 }  break;
@@ -74,13 +82,12 @@ int main() {
                 cout << "Apellidos: ";
                 cin >> apellidos;
 
-                // Validate fechaNacimiento to only have date of birth values
+                // Validacion de fecha 
                 bool validFechaNacimiento = false;
                 while (!validFechaNacimiento) {
                     cout << "Fecha de nacimiento (dd/mm/yyyy): ";
                     cin >> fechaNacimiento;
                 
-                    // validacion de fecha
                     regex dateRegex("\\d{2}/\\d{2}/\\d{4}");
                     if (!regex_match(fechaNacimiento, dateRegex)) {
                         cout << "Fecha de nacimiento invalida. Ingrese la fecha nuevamente." << endl;
@@ -115,7 +122,7 @@ int main() {
 
                 // Añadir los datos del usuario a la lista
                 listausers.Insertar(Usuario(nombres, apellidos, fechaNacimiento, correo, contra));
-                listausers.Imprimir();
+                //listausers.Imprimir();
                 } break;
             case 3:
                 // Información
@@ -128,7 +135,7 @@ int main() {
                 break;
             default:
                 cout << "Por favor seleccione una opcion de la lista." << endl;
-                this_thread::sleep_for(chrono::seconds(2));
+                this_thread::sleep_for(chrono::seconds(3));
                 break;
         }
     } while (opcion != 4);

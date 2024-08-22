@@ -44,12 +44,7 @@ class ListaDE
         Nodo<T>* ultimo;
 
     public:
-         ListaDE(){
-            primero->siguiente = ultimo;
-            ultimo->anterior = primero;
-            primero->anterior=NULL;
-            ultimo->siguiente=NULL;
-         }
+         ListaDE(): primero(nullptr), ultimo(nullptr) {}
 
         ~ListaDE() {
             Nodo<T>* temp = primero;
@@ -61,6 +56,8 @@ class ListaDE
         }
         void Insertar(T dato);
         void Imprimir();
+        void CopiarPorCorreo(const std::string& correo, ListaDE<T>& listaDestino);
+        void Vaciar();
         void Borrar(T dato);
         bool ListaVacia() {return (primero == NULL);}
         //string  Buscar(string dt);

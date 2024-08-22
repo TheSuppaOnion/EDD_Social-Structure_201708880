@@ -1,4 +1,5 @@
 #include "Listas.h"
+#include <vector>
 
 struct Usuario {
     string nombre;
@@ -14,17 +15,24 @@ struct Usuario {
     };
     
 struct Publicacion {
-    string dato;
-    Publicacion(string dato) : dato(dato) {}
-    /*friend ostream& operator<<(ostream& os, const Publicacion& p) {
-        os << u.nombre << " " << u.apellido << " " << u.fechaNac << " " << u.correoElectronico << " " << u.contrasenia << " ";
+    string correo;
+    string contenido;
+    string fecha;
+    string hora;
+    Publicacion(string correo, string contenido, string fecha, string hora) : correo(correo), contenido(contenido), fecha(fecha), hora(hora){}
+    friend ostream& operator<<(ostream& os, const Publicacion& p) {
+        os << p.correo << " " << p.contenido << " " << p.fecha << " " << p.hora << " ";
         return os;
-        }*/
+        }
+    vector<string> ObtenerPartes() const {
+        return {correo, contenido, fecha, hora};
+    }
     };
 
 ListaSE<Usuario> listadmin;
 ListaSE<Usuario> listausers;
-
+ListaDE<Publicacion> listapub;
+ListaDE<Publicacion> listapubtemp;
 
 template <typename T>
 void ListaSE<T>::Insertar(T dato)
@@ -54,11 +62,11 @@ void ListaSE<T>::Imprimir()
 };
 
 template <typename T>
-bool ListaSE<T>::buscar(string nombre, string contrasenia)
+bool ListaSE<T>::buscar(string correo, string contrasenia)
 {
     Nodo<T>* temp = primero;
     while (temp != nullptr) {
-        if (temp->dato.nombre == nombre && temp->dato.contrasenia == contrasenia) {
+        if (temp->dato.correoElectronico == correo && temp->dato.contrasenia == contrasenia) {
             return true;
         }
         temp = temp->siguiente;
@@ -87,12 +95,42 @@ template <typename T>
 void ListaDE<T>::Imprimir()
 {
     Nodo<T>* temp = primero;
-        while (temp != nullptr) {
-            cout << temp->dato << " <-> ";
-            temp = temp->siguiente;
+    while (temp != nullptr) {
+        vector<string> partes = temp->dato.ObtenerPartes();
+        for (size_t i = 1; i < partes.size(); ++i) {
+            cout << partes[i];
+            if (i < partes.size() - 1) {
+                cout << " || ";
+            }
         }
-    cout << "nullptr" << endl;
+        cout << endl;
+        temp = temp->siguiente;
+    }
+    cout << "Fin de las publicaciones!" << endl;
 };
+
+template <typename T>
+void ListaDE<T>::CopiarPorCorreo(const std::string& correo, ListaDE<T>& listaDestino) {
+    Nodo<T>* temp = primero;
+    while (temp != nullptr) {
+        if (temp->dato.correo == correo) {
+            listaDestino.Insertar(temp->dato);
+        }
+        temp = temp->siguiente;
+    }
+}
+
+template <typename T>
+void ListaDE<T>::Vaciar() {
+    Nodo<T>* temp = primero;
+    while (temp != nullptr) {
+        Nodo<T>* siguiente = temp->siguiente;
+        delete temp;
+        temp = siguiente;
+    }
+    primero = nullptr;
+    ultimo = nullptr;
+}
 
 /*string ListaDE<T>::Buscar(string dt)
 {
