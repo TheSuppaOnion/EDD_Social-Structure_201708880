@@ -1,33 +1,29 @@
-#include <iostream>
-#include "Listas.cpp"
+#include "TDA.cpp"
 #include <regex>
-#include <conio.h>
-#include <limits>
 #include "Menu.cpp"
+#include "Utilidades.h"
 
 using namespace std;
 
 int main() {
     int opcion;
+    setlocale(LC_ALL, "en_US.UTF-8");
     listadmin.Insertar(Usuario("Admin", "Romero", "14/09/1998", "admin@gmail.com", "EDD2S2024"));
     listausers.Insertar(Usuario("Test", "Romero", "14/09/1998", "test@ex.com", "123"));
+    VerificarPila("test@ex.com");
     listausers.Insertar(Usuario("Test", "Romero", "14/09/1998", "123@ex.com", "123"));
+    VerificarPila("123@ex.com");
     //listadmin.Imprimir();
     do {
-        system("cls");
+        limpiarConsola();
         cout << "Social Structure - Bismarck Romero 201708880" << endl;
         cout << "1. Iniciar Sesion" << endl;
         cout << "2. Registrarse" << endl;
         cout << "3. Informacion" << endl;
         cout << "4. Salir" << endl;
         cout << "Eliga la opcion deseada: ";
-
-        while (!(cin >> opcion)) {
-            // Si la entrada no es un número, limpiar el error y el buffer de entrada
-            cin.clear(); // Limpia el estado de error de cin
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignora el resto de la línea
-            cout << "Opcion invalida, por favor intente de nuevo: ";
-        }
+        
+        ValidarOpcion(opcion);
 
         switch (opcion) {
             case 1:{
@@ -37,32 +33,17 @@ int main() {
 
                 cout << "Ingrese su correo electronico: ";
                 cin >> correo;
-                char c;
                 cout << "Ingrese su contrasenia: ";
-                while (true) {
-                    c = _getch();
-                    if (c == '\r') { // Enter
-                    break;
-                    } else if (c == '\b') { // Barra espaciadora
-                    if (!contra.empty()) {
-                        contra.pop_back();
-                        cout << "\b \b"; // Mover el cursor atras, imprimir espacio, mover el cursor atras de nuevo
-                    }
-                } else {
-                    contra.push_back(c);
-                    cout << "*";
-                    }
-                }
-                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpia el buffer del teclado
-                cout << endl;
+                ValidarContrasenia(contra);
+                cout << endl;                
                 //cout << "Contrasenia ingresada: " << contra << endl;
 
                 // Buscar nombre y contraseña en las listas
-                if (listadmin.buscar(correo, contra) || listausers.buscar(correo, contra)) {
+                if (listadmin.validarLogin(correo, contra) || listausers.validarLogin(correo, contra)) {
                     cout << "Inicio de sesion exitoso. Bienvenido(a) " << correo << endl;
                     this_thread::sleep_for(chrono::seconds(3));
                     // Menu de usuario
-                    Menu(listadmin.buscar(correo, contra), correo);
+                    Menu(listadmin.validarLogin(correo, contra), correo);
                 } else {
                     cout << "Error en el correo o contrasenia, por favor intente de nuevo" << endl;
                     this_thread::sleep_for(chrono::seconds(3));
@@ -83,55 +64,29 @@ int main() {
                 cin >> apellidos;
 
                 // Validacion de fecha 
-                bool validFechaNacimiento = false;
-                while (!validFechaNacimiento) {
-                    cout << "Fecha de nacimiento (dd/mm/yyyy): ";
-                    cin >> fechaNacimiento;
+                validarFechaNacimiento(fechaNacimiento);
+                // Validacion del formato correo
+                validarCorreo(correo);
                 
-                    regex dateRegex("\\d{2}/\\d{2}/\\d{4}");
-                    if (!regex_match(fechaNacimiento, dateRegex)) {
-                        cout << "Fecha de nacimiento invalida. Ingrese la fecha nuevamente." << endl;
-                        continue;
-                    }
-                    // Validacion, dia, mes y año
-                    int day, month, year;
-                    sscanf(fechaNacimiento.c_str(), "%d/%d/%d", &day, &month, &year);
-                    if (day < 1 || day > 31 || month < 1 || month > 12 || year < 1900 || year > 2022) {
-                        cout << "Fecha de nacimiento invalida. Ingrese la fecha nuevamente." << endl;
-                        continue;
-                    }
-
-                    validFechaNacimiento = true;
-                }
-                // Validate correo to only have email
-                bool validCorreo = false;
-                while (!validCorreo) {
-                    cout << "Correo electronico: ";
-                    cin >> correo;
-                    // Validacion de correo
-                    regex emailRegex(R"(\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b)");
-                    if (!regex_match(correo, emailRegex)) {
-                        cout << "Correo electronico invalido. Ingrese el correo nuevamente." << endl;
-                        continue;
-                    }
-                    validCorreo = true;
-                }
-
                 cout << "Contrasenia: ";
                 cin >> contra;
 
                 // Añadir los datos del usuario a la lista
                 listausers.Insertar(Usuario(nombres, apellidos, fechaNacimiento, correo, contra));
+                VerificarPila(correo);
                 //listausers.Imprimir();
                 } break;
             case 3:
                 // Información
+                limpiarConsola();
+                cout << "Social Structure es una red social creada por Bismarck Romero con carne 201708880, estudiante de la Universidad de San Carlos de Guatemala." << endl;
+                cout << "La red social permite a los usuarios registrarse, iniciar sesion, crear publicaciones y hacer amigos." << endl;
+                system("pause");
                 break;
             case 4:
                 // Salir
                 cout << "Que tenga buen dia..." << endl;
                 this_thread::sleep_for(chrono::seconds(2));
-                system("cls");
                 break;
             default:
                 cout << "Por favor seleccione una opcion de la lista." << endl;
