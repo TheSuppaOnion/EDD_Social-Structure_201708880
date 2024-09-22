@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MenuAdm</class>
+ <widget class="QMainWindow" name="MenuAdm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Menú Administrador</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Bienvenido</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="cargaUsuariosButton">
+      <property name="text">
+       <string>Carga de usuarios</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="cargaRelacionesButton">
+      <property name="text">
+       <string>Carga de relaciones</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="cargaPublicacionesButton">
+      <property name="text">
+       <string>Carga de publicaciones</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="eliminarUsuariosButton">
+      <property name="text">
+       <string>Eliminar usuarios</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="reportesButton">
+      <property name="text">
+       <string>Reportes</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="cerrarSesionButton">
+      <property name="text">
+       <string>Cerrar sesión</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
