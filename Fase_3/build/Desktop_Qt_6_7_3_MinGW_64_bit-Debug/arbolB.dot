@@ -1,0 +1,8 @@
+digraph G {
+node [shape=record];
+"Nodo1"[label="Correo: jm@example.com, Contenido: Definitivamente, ¡no hay nada como una buena taza de café!, Fecha y Hora: 10/08/2024 08:15", shape=record];
+"Nodo1"->"Nodo2";
+"Nodo2"[label="Correo: f2@gmail.com, Contenido: Totalmente de acuerdo, el café siempre ayuda a empezar bien el día., Fecha y Hora: 10/08/2024 08:00", shape=record];
+"Nodo1"->"Nodo3";
+"Nodo3"[label="Correo: jm@example.com, Contenido: El café me ayuda a concentrarme en mis tareas., Fecha y Hora: 10/08/2024 08:45|Correo: jm@example.com, Contenido: Siempre estoy buscando nuevas variedades de café para probar., Fecha y Hora: 10/08/2024 09:30", shape=record];
+}

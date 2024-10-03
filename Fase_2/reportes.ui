@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Reportes</class>
+ <widget class="QMainWindow" name="Reportes">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1291</width>
+    <height>647</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Reportes</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="paginaGraficas">
+       <layout class="QVBoxLayout" name="verticalLayoutGraficas">
+        <item>
+         <widget class="QLabel" name="labelPrincipal">
+          <property name="text">
+           <string>Reportes</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="1" column="2">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Publicaciones: lista general de publicaciones(lista doble)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QGraphicsView" name="graficaAVL">
+            <property name="maximumSize">
+             <size>
+              <width>624</width>
+              <height>492</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelUsuarios">
+            <property name="text">
+             <string>Usuarios: Árbol AVL de usuarios</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QGraphicsView" name="graficaListaDE">
+            <property name="maximumSize">
+             <size>
+              <width>623</width>
+              <height>492</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="paginaBuscar">
+       <layout class="QVBoxLayout" name="verticalLayoutBuscar">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayoutUsuarios">
+          <item>
+           <widget class="QLineEdit" name="correoLineEdit">
+            <property name="placeholderText">
+             <string>Ingrese correo</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="buscarCorreoButton">
+            <property name="text">
+             <string>Buscar</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="actualizarButton">
+            <property name="text">
+             <string>Actualizar</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayoutBotones">
+          <item alignment="Qt::AlignmentFlag::AlignHCenter">
+           <widget class="QPushButton" name="preordenButton">
+            <property name="text">
+             <string>Preorden</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignmentFlag::AlignHCenter">
+           <widget class="QPushButton" name="inordenButton">
+            <property name="text">
+             <string>Inorden</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignmentFlag::AlignHCenter">
+           <widget class="QPushButton" name="postordenButton">
+            <property name="text">
+             <string>Postorden</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="resultadosTableWidget"/>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item alignment="Qt::AlignmentFlag::AlignHCenter">
+     <widget class="QPushButton" name="regresarButton">
+      <property name="text">
+       <string>Regresar</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1291</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuGraficas">
+    <property name="title">
+     <string>Graficas</string>
+    </property>
+    <addaction name="actionMostrarGraficas"/>
+   </widget>
+   <widget class="QMenu" name="menuBuscar">
+    <property name="title">
+     <string>Buscar</string>
+    </property>
+    <addaction name="actionBuscarCorreo"/>
+   </widget>
+   <addaction name="menuBuscar"/>
+   <addaction name="menuGraficas"/>
+  </widget>
+  <action name="actionMostrarGraficas">
+   <property name="text">
+    <string>Mostrar Graficas</string>
+   </property>
+  </action>
+  <action name="actionBuscarCorreo">
+   <property name="text">
+    <string>Buscar por Correo</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

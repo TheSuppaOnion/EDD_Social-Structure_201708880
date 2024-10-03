@@ -1,0 +1,28 @@
+digraph G {
+node [shape=circle];
+"Nodo1" [label="Luis Perez 1988/04/09 lp@example.com luispass "];
+"Nodo1" -> "Nodo2";
+"Nodo2" [label="Carlos Gomez 1990/05/12 cg@example.com carlospass "];
+"Nodo2" -> "Nodo4";
+"Nodo4" [label="Test Romero 14/09/1998 abc@ex.com 123 "];
+"Nodo4" -> "Nodo7";
+"Nodo7" [label="Ana Hernandez 1995/11/30 ah@example.com anapass "];
+"Nodo2" -> "Nodo5";
+"Nodo5" [label="Jose Garcia 1991/07/14 jg@example.com josepass "];
+"Nodo5" -> "Nodo10";
+"Nodo10" [label="Elena Torres 1987/12/22 et@example.com elenapass "];
+"Nodo10" -> "Nodo13";
+"Nodo13" [label="Fase2 Calificacion 2000/01/01 f2@gmail.com 123 "];
+"Nodo5" -> "Nodo11";
+"Nodo11" [label="Juan Martinez 1992/02/17 jm@example.com juanpass "];
+"Nodo1" -> "Nodo3";
+"Nodo3" [label="Maria Lopez 1985/08/23 ml@example.com mariapass "];
+"Nodo3" -> "Nodo18";
+"Nodo18" [label="Laura Ramirez 1993/09/05 lr@example.com laurapass "];
+"Nodo3" -> "Nodo19";
+"Nodo19" [label="Sofia Gonzalez 1994/06/28 sg@example.com sofiapass "];
+"Nodo19" -> "Nodo22";
+"Nodo22" [label="Miguel Rodriguez 1989/03/11 mr@example.com miguelpass "];
+"Nodo19" -> "Nodo23";
+"Nodo23" [label="Test Romero 14/09/1998 test@ex.com 123 "];
+}

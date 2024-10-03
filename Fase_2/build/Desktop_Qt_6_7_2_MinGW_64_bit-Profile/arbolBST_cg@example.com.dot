@@ -1,0 +1,5 @@
+digraph G {
+"Nodo1"[label="12/08/2024"];
+"Nodo1"->"Nodo3";
+"Nodo3"[label="17/08/2024"];
+}

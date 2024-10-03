@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>registro</class>
+ <widget class="QDialog" name="registro">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Registro</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelNombres">
+       <property name="text">
+        <string>Nombres:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="nombresLineEdit"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="labelApellidos">
+       <property name="text">
+        <string>Apellidos:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="apellidosLineEdit"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="labelFechaNacimiento">
+       <property name="text">
+        <string>Fecha de Nacimiento:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="labelCorreo">
+       <property name="text">
+        <string>Correo:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="correoLineEdit"/>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="labelContrasenia">
+       <property name="text">
+        <string>Contraseña:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="contraseniaLineEdit"/>
+     </item>
+     <item row="5" column="1">
+      <widget class="QPushButton" name="registrarButton">
+       <property name="text">
+        <string>Registrar</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QDateEdit" name="fechaNacimiento"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QPushButton" name="regresar">
+     <property name="text">
+      <string>Regresar</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
