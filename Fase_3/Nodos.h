@@ -67,24 +67,6 @@ public:
     NodoBB(T dato) : dato(dato), izquierdo(nullptr), derecho(nullptr), listaPublicaciones(std::make_shared<ListaSE<T>>()) {}
 };
 
-/*#define MAX 5
-#define MIN 1
-
-template <typename T>
-class NodoB {
-public:
-    T val[MAX + 1];
-    int num = 0;
-    NodoB<T>* link[MAX + 1];
-    bool hoja;
-
-    NodoB(bool hoja) : hoja(hoja) {
-        for (int i = 0; i < MAX + 1; i++) {
-            link[i] = nullptr;
-        }
-    }
-};*/
-
 template <typename T, int ORDER>
 class NodoB {
 public:
@@ -97,6 +79,16 @@ public:
         for (int i = 0; i < ORDER; i++)
             children[i] = nullptr;
     }
+};
+
+template <typename K, typename V>
+class MapNode {
+public:
+    K key;
+    V value;
+    MapNode* next;
+
+    MapNode(K key, V value) : key(key), value(value), next(nullptr) {}
 };
 
 #endif // NODOS_H
